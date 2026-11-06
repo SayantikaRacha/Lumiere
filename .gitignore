@@ -1,3 +1,8 @@
 node_modules/
 .env
 orders.json
+lumiere.db
+lumiere.db-wal
+lumiere.db-shm
+uploads/*
+!uploads/.gitkeep

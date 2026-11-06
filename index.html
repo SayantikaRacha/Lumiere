@@ -3,253 +3,2048 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lumière – Custom Edits & Aesthetic Services</title>
-  <meta name="description" content="Lumière: Custom digital invitations, small edits, and aesthetic soft copies." />
+  <title>Lumière — Creative Edits, Digital Invitations & Aesthetic Studio</title>
+  <meta name="description" content="Lumière: Custom digital invitations, high-end aesthetic photo edits, and curated design goods." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌫️</text></svg>">
 
   <style>
-    .brand { font-size: 3rem; letter-spacing: 0.06em; animation: lumiereFlow 6s cubic-bezier(0.45,0,0.2,1) infinite; will-change: transform, text-shadow; }
-    @keyframes lumiereFlow { 0% { text-shadow:0 0 4px rgba(255,255,255,0.12); transform:translateY(0) scale(1); } 40% { text-shadow:0 0 10px rgba(255,255,255,0.28),0 0 22px rgba(255,215,160,0.18); transform:translateY(-1.5px) scale(1.015); } 70% { text-shadow:0 0 14px rgba(255,255,255,0.32),0 0 30px rgba(255,215,160,0.22); transform:translateY(-2px) scale(1.02); } 100% { text-shadow:0 0 4px rgba(255,255,255,0.12); transform:translateY(0) scale(1); } }
+    /* ==========================================================================
+       1. Theme Tokens & CSS Custom Properties
+       ========================================================================== */
+    :root {
+      /* Studio Paper (Default) */
+      --bg: #f8fafc;
+      --bg-subtle: #f1f5f9;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --card-bg: rgba(255, 255, 255, 0.85);
+      --card-border: rgba(15, 23, 42, 0.08);
+      --header-bg: rgba(255, 255, 255, 0.8);
+      --button-bg: #0f172a;
+      --button-text: #ffffff;
+      --accent: #2563eb;
+      --accent-light: rgba(37, 99, 235, 0.08);
+      --accent-glow: rgba(37, 99, 235, 0.25);
+      --shadow-3d: 0 20px 40px -15px rgba(0, 0, 0, 0.08), 0 0 1px 1px rgba(0, 0, 0, 0.04);
+      --shadow-lift: 0 30px 60px -20px rgba(0, 0, 0, 0.16);
+      --glare-opacity: 0.15;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-pill: 999px;
+      --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
 
-    :root { --bg:#ffffff; --text:#1f2937; --card:#fafafa; --header:#ffffff; --footer:#f9fafb; --button:#111827; --accent:#111827; --accent-light:rgba(17,24,39,0.05); --accent-hover:rgba(17,24,39,0.12); --transition-speed:0.6s; --select-bg:#fafafa; --select-text:#111827; --select-border:#d1d5db; }
-    body { font-family:'Segoe UI',sans-serif; margin:0; background:var(--bg); color:var(--text); transition:background-color var(--transition-speed), color var(--transition-speed); }
-    header, section, footer, button { transition:background var(--transition-speed), color var(--transition-speed); }
-    header { padding:3.5rem 2rem 1.5rem; text-align:center; box-shadow:0 4px 20px rgba(0,0,0,0.15); background:var(--header); }
-    nav a { margin:0 12px; text-decoration:none; font-weight:600; color:var(--text); }
-    section { padding:3rem 2rem; max-width:900px; margin:auto; }
+    /* Wisteria Veil */
+    [data-theme="wisteria-veil"] {
+      --bg: #f5f2fd;
+      --bg-subtle: #ece6fb;
+      --text: #371b58;
+      --text-muted: #7b529d;
+      --card-bg: rgba(255, 255, 255, 0.82);
+      --card-border: rgba(90, 40, 140, 0.1);
+      --header-bg: rgba(245, 242, 253, 0.85);
+      --button-bg: #4c1d95;
+      --button-text: #ffffff;
+      --accent: #7c3aed;
+      --accent-light: rgba(124, 58, 237, 0.08);
+      --accent-glow: rgba(124, 58, 237, 0.28);
+      --shadow-3d: 0 20px 40px -15px rgba(76, 29, 149, 0.08);
+      --shadow-lift: 0 30px 60px -20px rgba(76, 29, 149, 0.18);
+    }
 
-    .card { background:var(--card); padding:2rem; margin-bottom:2rem; border-radius:14px; box-shadow:0 10px 28px rgba(0,0,0,0.12); transition:transform .45s cubic-bezier(.22,1,.36,1), box-shadow .35s; }
-    .card:hover { transform:translateY(-6px); box-shadow:0 16px 36px rgba(0,0,0,0.18); }
-    button { background:var(--button); color:#fff; border:none; padding:12px 22px; border-radius:999px; font-weight:600; cursor:pointer; }
+    /* Golden Hour */
+    [data-theme="golden-hour"] {
+      --bg: #fffbf0;
+      --bg-subtle: #fbf2dc;
+      --text: #451a03;
+      --text-muted: #92400e;
+      --card-bg: rgba(255, 253, 247, 0.88);
+      --card-border: rgba(180, 83, 9, 0.12);
+      --header-bg: rgba(255, 251, 240, 0.85);
+      --button-bg: #78350f;
+      --button-text: #ffffff;
+      --accent: #d97706;
+      --accent-light: rgba(217, 119, 6, 0.1);
+      --accent-glow: rgba(217, 119, 6, 0.3);
+      --shadow-3d: 0 20px 40px -15px rgba(120, 53, 15, 0.08);
+      --shadow-lift: 0 30px 60px -20px rgba(120, 53, 15, 0.18);
+    }
 
-    .theme-selector select { padding:12px 18px; border-radius:999px; border:1px solid var(--select-border); background:var(--select-bg); color:var(--select-text); }
-    #services ul { list-style:none; padding:0; }
-    #services li { display:flex; gap:1rem; padding:1rem; margin:1rem 0; border-left:5px solid var(--accent); background:var(--accent-light); border-radius:10px; transition:.35s cubic-bezier(.4,0,.2,1); }
-    #services li:hover { transform:translateX(10px); background:var(--accent-hover); }
-    #services .icon { font-size:1.8rem; }
+    /* Cachemire */
+    [data-theme="cachemire"] {
+      --bg: #fdfaf6;
+      --bg-subtle: #f5ede4;
+      --text: #3c2f2f;
+      --text-muted: #7c6864;
+      --card-bg: rgba(255, 255, 255, 0.85);
+      --card-border: rgba(140, 110, 100, 0.12);
+      --header-bg: rgba(253, 250, 246, 0.85);
+      --button-bg: #4a3733;
+      --button-text: #ffffff;
+      --accent: #9c6644;
+      --accent-light: rgba(156, 102, 68, 0.1);
+      --accent-glow: rgba(156, 102, 68, 0.25);
+      --shadow-3d: 0 20px 40px -15px rgba(74, 55, 51, 0.08);
+      --shadow-lift: 0 30px 60px -20px rgba(74, 55, 51, 0.16);
+    }
 
-    .trust { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:1rem; margin-top:1.5rem; }
-    .badge { padding:1rem; border-radius:12px; background:var(--accent-light); text-align:center; font-weight:600; }
+    /* Espresso */
+    [data-theme="espresso"] {
+      --bg: #1c140e;
+      --bg-subtle: #140d09;
+      --text: #faeed9;
+      --text-muted: #bfa588;
+      --card-bg: rgba(38, 27, 20, 0.75);
+      --card-border: rgba(230, 200, 160, 0.12);
+      --header-bg: rgba(28, 20, 14, 0.85);
+      --button-bg: #e2b97f;
+      --button-text: #1c140e;
+      --accent: #d4a373;
+      --accent-light: rgba(212, 163, 115, 0.12);
+      --accent-glow: rgba(212, 163, 115, 0.35);
+      --shadow-3d: 0 25px 50px -15px rgba(0, 0, 0, 0.6);
+      --shadow-lift: 0 35px 70px -20px rgba(0, 0, 0, 0.8);
+      --glare-opacity: 0.25;
+    }
 
-    form { display:grid; gap:1rem; }
-    label { font-weight:600; color:var(--text); font-size:0.95rem; }
-    input, textarea, select { padding:12px; border-radius:10px; border:1px solid var(--select-border); font-size:1rem; background:white; color:var(--text); transition:border-color .3s; }
-    input:focus, textarea:focus, select:focus { outline:none; border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-light); }
-    
-    .form-message { padding:12px; border-radius:10px; text-align:center; font-weight:600; display:none; }
-    .form-message.success { background:#dcfce7; color:#166534; display:block; }
-    .form-message.error { background:#fee2e2; color:#991b1b; display:block; }
-    .form-message.loading { background:var(--accent-light); color:var(--accent); display:block; }
-    
-    button:disabled { opacity:0.6; cursor:not-allowed; }
-    button:not(:disabled):hover { transform:scale(1.05); }
+    /* Bordeaux */
+    [data-theme="bordeaux"] {
+      --bg: #0c0507;
+      --bg-subtle: #17070b;
+      --text: #fae1e6;
+      --text-muted: #c28896;
+      --card-bg: rgba(28, 12, 17, 0.75);
+      --card-border: rgba(230, 100, 130, 0.15);
+      --header-bg: rgba(12, 5, 7, 0.85);
+      --button-bg: #991b1b;
+      --button-text: #fae1e6;
+      --accent: #e11d48;
+      --accent-light: rgba(225, 29, 72, 0.12);
+      --accent-glow: rgba(225, 29, 72, 0.35);
+      --shadow-3d: 0 25px 50px -15px rgba(0, 0, 0, 0.7);
+      --shadow-lift: 0 35px 70px -20px rgba(0, 0, 0, 0.9);
+      --glare-opacity: 0.3;
+    }
 
-    footer { text-align:center; padding:1.5rem; background:var(--footer); font-size:.9rem; }
+    /* ==========================================================================
+       2. Global Reset & 3D Environment
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
 
-    /* Shop Products Section */
-    #shop .product-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:1rem; margin-top:1rem; }
-    #shop .product-card { text-align:center; padding:1rem; border-radius:12px; background:var(--accent-light); box-shadow:0 10px 28px rgba(0,0,0,0.12); transition:transform .35s, box-shadow .35s; }
-    #shop .product-card:hover { transform:translateY(-6px); box-shadow:0 16px 36px rgba(0,0,0,0.18); }
-    #shop .product-card img { max-width:100%; border-radius:8px; margin-bottom:0.5rem; }
-    #shop .product-card a { display:inline-block; margin-top:0.5rem; background:var(--button); color:#fff; padding:8px 16px; border-radius:999px; text-decoration:none; font-weight:600; }
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.5s ease, color 0.5s ease;
+      line-height: 1.6;
+      overflow-x: hidden;
+      perspective: 1200px;
+    }
+
+    /* Background Ambient 3D Glow */
+    .ambient-glow {
+      position: fixed;
+      top: 15%;
+      left: 50%;
+      transform: translateX(-50%) translateZ(-300px);
+      width: 70vw;
+      height: 50vh;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+      transition: background 0.8s ease;
+    }
+
+    /* ==========================================================================
+       3. Navigation & Header
+       ========================================================================== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--header-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--card-border);
+      padding: 1.25rem 2rem;
+      transition: var(--transition-smooth);
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+    }
+
+    .brand-container {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      text-decoration: none;
+    }
+
+    .brand-symbol {
+      font-size: 2rem;
+      display: inline-block;
+      animation: floatSymbol 4s ease-in-out infinite;
+    }
+
+    @keyframes floatSymbol {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-5px) rotate(4deg); }
+    }
+
+    .brand-title {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--text);
+      display: block;
+      line-height: 1.1;
+    }
+
+    .brand-subtitle {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    nav {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      position: relative;
+      padding: 6px 0;
+      transition: color 0.2s;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* 3D Theme Switcher Dropdown */
+    .theme-selector {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      transition: var(--transition-smooth);
+    }
+
+    .theme-selector:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .theme-selector label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .theme-selector select {
+      background: transparent;
+      border: none;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 0.9rem;
+      outline: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    /* ==========================================================================
+       4. Hero Section & 3D Interactive Banner
+       ========================================================================== */
+    .hero-section {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4.5rem 1.5rem 3rem;
+      text-align: center;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 6px 18px;
+      border-radius: var(--radius-pill);
+      background: var(--accent-light);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.5rem;
+      transform: translateZ(20px);
+    }
+
+    .hero-heading {
+      font-size: clamp(2.5rem, 5vw, 4.2rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+      color: var(--text);
+    }
+
+    .hero-subtext {
+      max-width: 640px;
+      margin: 0 auto 2.5rem;
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* 3D Button Components */
+    .btn-3d {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 14px 28px;
+      border-radius: var(--radius-pill);
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      background: var(--button-bg);
+      color: var(--button-text);
+      box-shadow: 0 10px 25px -8px var(--accent-glow);
+      transition: var(--transition-smooth);
+      transform-style: preserve-3d;
+      transform: translateZ(10px);
+    }
+
+    .btn-3d:hover {
+      transform: translateY(-4px) scale(1.02) translateZ(25px);
+      box-shadow: 0 16px 32px -8px var(--accent-glow);
+    }
+
+    .btn-3d-secondary {
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--card-border);
+      box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.06);
+    }
+
+    .btn-3d-secondary:hover {
+      border-color: var(--accent);
+      background: var(--bg-subtle);
+      box-shadow: 0 12px 25px -8px var(--accent-glow);
+    }
+
+    /* ==========================================================================
+       5. 3D Card Architecture (Tilt & Glare)
+       ========================================================================== */
+    .card-3d-wrap {
+      perspective: 1000px;
+      transform-style: preserve-3d;
+    }
+
+    .card-3d {
+      position: relative;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem;
+      box-shadow: var(--shadow-3d);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      transition: transform 0.15s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
+      transform-style: preserve-3d;
+      overflow: hidden;
+    }
+
+    .card-3d:hover {
+      box-shadow: var(--shadow-lift);
+      border-color: var(--accent);
+    }
+
+    /* Dynamic Glare Reflection */
+    .card-glare {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: radial-gradient(circle 350px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, var(--glare-opacity)), transparent 80%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 2;
+    }
+
+    .card-3d:hover .card-glare {
+      opacity: 1;
+    }
+
+    /* Section Styling */
+    section {
+      max-width: 1200px;
+      margin: 4.5rem auto;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 2.75rem;
+    }
+
+    .section-tag {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .section-description {
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0.5rem auto 0;
+      font-size: 1rem;
+    }
+
+    /* ==========================================================================
+       6. 3D Mouse-Driven Cinematic Portfolio Showcase
+       ========================================================================== */
+    .showcase-viewport {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      padding: 3rem 1rem 4rem;
+      perspective: 1400px;
+      cursor: grab;
+      user-select: none;
+    }
+
+    .showcase-viewport:active {
+      cursor: grabbing;
+    }
+
+    .showcase-track {
+      display: flex;
+      gap: 2rem;
+      width: max-content;
+      transform-style: preserve-3d;
+      transition: transform 0.2s cubic-bezier(0.1, 0.9, 0.2, 1);
+      padding: 0 2rem;
+    }
+
+    .portfolio-item {
+      width: 320px;
+      height: 460px;
+      flex-shrink: 0;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-3d);
+      transform-style: preserve-3d;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+      cursor: pointer;
+    }
+
+    .portfolio-item:hover {
+      transform: translateY(-12px) scale(1.03) translateZ(40px) !important;
+      box-shadow: var(--shadow-lift);
+      border-color: var(--accent);
+    }
+
+    .portfolio-img-container {
+      width: 100%;
+      height: 320px;
+      position: relative;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .portfolio-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .portfolio-item:hover .portfolio-img {
+      transform: scale(1.08);
+    }
+
+    .portfolio-tag {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(8px);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      letter-spacing: 0.04em;
+    }
+
+    .portfolio-content {
+      padding: 1.25rem;
+    }
+
+    .portfolio-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      color: var(--text);
+    }
+
+    .portfolio-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .slider-hint {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    /* ==========================================================================
+       7. Studio Services (3D Tiles)
+       ========================================================================== */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .service-card {
+      padding: 2.25rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .service-icon {
+      font-size: 2.5rem;
+      display: inline-block;
+      margin-bottom: 0.5rem;
+      transform: translateZ(25px);
+    }
+
+    .service-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      transform: translateZ(15px);
+    }
+
+    .service-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      transform: translateZ(10px);
+    }
+
+    .service-features {
+      list-style: none;
+      margin-top: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transform: translateZ(10px);
+    }
+
+    .service-features li {
+      font-size: 0.85rem;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .service-features li::before {
+      content: '✓';
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    /* ==========================================================================
+       8. Interactive Order Customizer (Phase 2 Upgrade)
+       ========================================================================== */
+    .order-form-container {
+      max-width: 840px;
+      margin: 0 auto;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .form-hint {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: -0.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .input-3d {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+      color: var(--text);
+      font-size: 1rem;
+      font-family: inherit;
+      outline: none;
+      transition: var(--transition-smooth);
+    }
+
+    .input-3d:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-light);
+    }
+
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    @media (max-width: 640px) {
+      .form-grid-2 { grid-template-columns: 1fr; }
+    }
+
+    /* Style Selector Pills */
+    .style-pills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .style-pill {
+      position: relative;
+      padding: 12px 14px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--card-border);
+      background: var(--bg-subtle);
+      color: var(--text);
+      cursor: pointer;
+      text-align: center;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: var(--transition-smooth);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .style-pill input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .style-pill:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .style-pill.active {
+      background: var(--accent-light);
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight: 700;
+      box-shadow: 0 4px 12px var(--accent-glow);
+    }
+
+    /* Turnaround Options */
+    .turnaround-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .turnaround-card {
+      padding: 14px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--card-border);
+      background: var(--bg-subtle);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .turnaround-card input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+    }
+
+    .turnaround-card.active {
+      border-color: var(--accent);
+      background: var(--accent-light);
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* Drag-and-Drop Image Dropzone */
+    .dropzone-container {
+      border: 2px dashed var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      background: var(--bg-subtle);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      position: relative;
+    }
+
+    .dropzone-container:hover,
+    .dropzone-container.dragover {
+      border-color: var(--accent);
+      background: var(--accent-light);
+      transform: scale(1.01);
+    }
+
+    .dropzone-icon {
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .dropzone-text {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .dropzone-subtext {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .dropzone-file-input {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    /* Image Preview Tray */
+    .file-previews-tray {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .preview-chip {
+      position: relative;
+      width: 75px;
+      height: 75px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      background: #000;
+    }
+
+    .preview-chip img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .preview-remove-btn {
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      background: rgba(0, 0, 0, 0.75);
+      color: #fff;
+      border: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      font-size: 0.7rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Form Status Messaging */
+    .form-feedback {
+      padding: 14px;
+      border-radius: var(--radius-md);
+      margin-top: 1.25rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-align: center;
+      display: none;
+    }
+
+    .form-feedback.success {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      display: block;
+    }
+
+    .form-feedback.error {
+      background: rgba(239, 68, 68, 0.15);
+      color: #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      display: block;
+    }
+
+    .form-feedback.loading {
+      background: var(--accent-light);
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      display: block;
+    }
+
+    /* ==========================================================================
+       9. Curated Affiliate Showcase (Phase 2 Upgrade)
+       ========================================================================== */
+    .shop-filter-bar {
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .shop-filter-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 8px 18px;
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .shop-filter-btn:hover,
+    .shop-filter-btn.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px var(--accent-glow);
+    }
+
+    .affiliate-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .product-card-3d {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-3d);
+      transition: var(--transition-smooth);
+      transform-style: preserve-3d;
+      position: relative;
+    }
+
+    .product-card-3d:hover {
+      transform: translateY(-8px) scale(1.02) translateZ(30px);
+      box-shadow: var(--shadow-lift);
+      border-color: var(--accent);
+    }
+
+    .product-img-wrap {
+      width: 100%;
+      height: 220px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-bottom: 1.25rem;
+      background: var(--bg-subtle);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .product-card-3d:hover .product-img {
+      transform: scale(1.06);
+    }
+
+    .product-category-tag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: var(--radius-pill);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .product-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: var(--text);
+    }
+
+    .product-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+
+    .product-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid var(--card-border);
+    }
+
+    .product-rating {
+      font-size: 0.85rem;
+      color: #f59e0b;
+    }
+
+    .affiliate-disclosure {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.4;
+    }
+
+    /* ==========================================================================
+       10. Lightbox Modal & Details
+       ========================================================================== */
+    #imageModal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.92);
+      backdrop-filter: blur(14px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      padding: 2rem;
+      cursor: pointer;
+    }
+
+    #imageModal.active {
+      display: flex;
+    }
+
+    .modal-content-wrap {
+      max-width: 900px;
+      width: 100%;
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--card-border);
+      overflow: hidden;
+      cursor: default;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      box-shadow: 0 35px 80px rgba(0, 0, 0, 0.8);
+    }
+
+    @media (max-width: 768px) {
+      .modal-content-wrap { grid-template-columns: 1fr; }
+    }
+
+    #modalImg {
+      width: 100%;
+      height: 100%;
+      min-height: 350px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .modal-info {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* ==========================================================================
+       11. Footer
+       ========================================================================== */
+    footer {
+      border-top: 1px solid var(--card-border);
+      background: var(--bg-subtle);
+      padding: 3.5rem 1.5rem 2.5rem;
+      margin-top: 6rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    .footer-credit {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .admin-link {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      opacity: 0.5;
+      text-decoration: none;
+      margin-top: 0.5rem;
+      transition: opacity 0.2s;
+    }
+
+    .admin-link:hover {
+      opacity: 1;
+      color: var(--accent);
+    }
   </style>
 </head>
-<body>
+<body data-theme="studio-paper">
 
-<header>
-  <h1 class="brand">Lumière</h1>
-  <p>Custom digital invitations, small edits, and aesthetic soft copies</p>
-  <nav>
-    <a href="#services">Services</a>
-    <a href="#orders">Order</a>
-    <a href="#shop">Shop</a>
-    <a href="#contact">Contact</a>
-  </nav>
-  <div class="theme-selector">
-    <select id="theme" onchange="setTheme(this.value)">
-      <option value="minimal" selected>Minimal White</option>
-      <option value="lavender">Lavender</option>
-      <option value="warm">Warm</option>
-      <option value="soft-beige">Soft Beige</option>
-      <option value="dark-autumn">Dark (Autumn)</option>
-      <option value="dark-vamp">Dark (Vampire)</option>
-    </select>
-  </div>
-</header>
+  <!-- 3D Ambient Blur Sphere -->
+  <div class="ambient-glow" id="ambientGlow"></div>
 
-<section id="services">
-  <div class="card">
-    <h2>🎨 Services</h2>
-    <ul>
-      <li><span class="icon">💌</span>Custom digital invitations</li>
-      <li><span class="icon">🖌️</span>Small edits & refinements</li>
-      <li><span class="icon">📁</span>Soft copy delivery</li>
-    </ul>
-  </div>
-</section>
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <a href="#" class="brand-container">
+        <span class="brand-symbol">🌫️</span>
+        <div>
+          <span class="brand-title">Lumière</span>
+          <span class="brand-subtitle">Every Version Teaches Something</span>
+        </div>
+      </a>
 
-<section id="orders">
-  <div class="card">
-    <h2>📝 Request an Order</h2>
-    <form id="orderForm" onsubmit="handleOrder(event)">
-      <label for="name">Your Name *</label>
-      <input id="name" name="name" required placeholder="Your Name" minlength="2" />
-      
-      <label for="email">Email *</label>
-      <input id="email" name="email" type="email" required placeholder="your@email.com" />
-      
-      <label for="service">Select Service *</label>
-      <select id="service" name="service" required>
-        <option value="">Select Service</option>
-        <option value="Invitation">Custom Digital Invitation</option>
-        <option value="Small Edit">Small Edit & Refinement</option>
-        <option value="Soft Copy">Soft Copy Delivery</option>
-      </select>
-      
-      <label for="description">Describe your request *</label>
-      <textarea id="description" name="description" rows="4" required placeholder="Tell us more about what you need..." minlength="10"></textarea>
-      
-      <button id="submitBtn" type="submit">Send Request</button>
-      <div id="formMessage" class="form-message"></div>
-    </form>
-  </div>
-</section>
+      <nav>
+        <a href="#showcase">Portfolio</a>
+        <a href="#services">Services</a>
+        <a href="#customizer">Custom Order</a>
+        <a href="#curated-shop">Curated Finds</a>
+        <a href="#contact">Contact</a>
+      </nav>
 
-<section id="shop">
-  <div class="card">
-    <h2>🛒 Shop My Designs</h2>
-    <div class="product-grid">
-      <div class="product-card">
-        <img src="preview-tshirt.jpg" alt="Aesthetic T-shirt" />
-        <p>Aesthetic T-shirt</p>
-        <a href="YOUR_ZAZZLE_TSHIRT_LINK" target="_blank">Buy Now</a>
+      <!-- Sophisticated 6-Theme Switcher -->
+      <div class="theme-selector">
+        <label for="themeSelect">Theme</label>
+        <select id="themeSelect" onchange="applyTheme(this.value)">
+          <option value="studio-paper">Studio Paper</option>
+          <option value="wisteria-veil">Wisteria Veil</option>
+          <option value="golden-hour">Golden Hour</option>
+          <option value="cachemire">Cachemire</option>
+          <option value="espresso">Espresso</option>
+          <option value="bordeaux">Bordeaux</option>
+        </select>
       </div>
-      <div class="product-card">
-        <img src="preview-tote.jpg" alt="Cute Tote Bag" />
-        <p>Cute Tote Bag</p>
-        <a href="YOUR_ZAZZLE_TOTE_LINK" target="_blank">Buy Now</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main>
+    <div class="hero-section">
+      <div class="hero-badge">
+        <span>✨</span> Creative Studio & Aesthetic Design
       </div>
-      <div class="product-card">
-        <img src="preview-mug.jpg" alt="Coffee Mug" />
-        <p>Custom Mug</p>
-        <a href="YOUR_ZAZZLE_MUG_LINK" target="_blank">Buy Now</a>
+      <h1 class="hero-heading">
+        Where Digital Design<br />Meets Emotion & Light
+      </h1>
+      <p class="hero-subtext">
+        Bespoke digital invitations, cinematic photo refinements, and aesthetic soft-copy designs crafted with intent.
+      </p>
+      <div class="hero-cta-group">
+        <a href="#customizer" class="btn-3d">
+          <span>✨ Request Custom Order</span>
+        </a>
+        <a href="#showcase" class="btn-3d btn-3d-secondary">
+          <span>🖼️ Explore Past Works</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 1. Cinematic 3D Mouse-Driven Portfolio Showcase -->
+    <section id="showcase">
+      <div class="section-header">
+        <span class="section-tag">Cinematic Showcase</span>
+        <h2 class="section-title">Past Editing & Design Works</h2>
+        <p class="section-description">
+          Move your cursor horizontally to glide through past edits in 3D perspective. Click any piece for full details.
+        </p>
+      </div>
+
+      <div class="showcase-viewport" id="showcaseViewport">
+        <div class="showcase-track" id="showcaseTrack">
+
+          <!-- Work 1 -->
+          <div class="portfolio-item card-3d-interactive" onclick="openPortfolioModal(
+            'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80',
+            'Botanical Monogram Wedding Invitation',
+            'Digital Invitation',
+            'Designed for an intimate spring wedding. Features delicate hand-drawn eucalyptus leaves, gilded serif typography, and soft pearl grain texture.'
+          )">
+            <div class="portfolio-img-container">
+              <span class="portfolio-tag">Digital Invitation</span>
+              <img class="portfolio-img" src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80" alt="Botanical Monogram Invitation" loading="lazy" />
+            </div>
+            <div class="portfolio-content">
+              <h3 class="portfolio-title">Botanical Monogram Suite</h3>
+              <p class="portfolio-desc">Minimalist gold foil stamping on textured raw paper grain.</p>
+            </div>
+          </div>
+
+          <!-- Work 2 -->
+          <div class="portfolio-item card-3d-interactive" onclick="openPortfolioModal(
+            'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80',
+            'Editorial Film Grain Portrait Edit',
+            'Photo Retouch',
+            'Skin tone harmonization, subtle 35mm cinematic film grain, soft lens diffusion, and moody twilight palette adjustment.'
+          )">
+            <div class="portfolio-img-container">
+              <span class="portfolio-tag">Editorial Edit</span>
+              <img class="portfolio-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Editorial Film Portrait" loading="lazy" />
+            </div>
+            <div class="portfolio-content">
+              <h3 class="portfolio-title">Nocturne 35mm Retouch</h3>
+              <p class="portfolio-desc">Cinematic lighting recovery with warm organic analog tones.</p>
+            </div>
+          </div>
+
+          <!-- Work 3 -->
+          <div class="portfolio-item card-3d-interactive" onclick="openPortfolioModal(
+            'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=80',
+            'Golden Hour Romantic Soirée Invitation',
+            'Event Design',
+            'Sunset warm gradients combined with delicate French script typography. Optimized for high-res mobile sharing and print.'
+          )">
+            <div class="portfolio-img-container">
+              <span class="portfolio-tag">Digital Invitation</span>
+              <img class="portfolio-img" src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80" alt="Golden Hour Soirée" loading="lazy" />
+            </div>
+            <div class="portfolio-content">
+              <h3 class="portfolio-title">Golden Hour Soirée</h3>
+              <p class="portfolio-desc">Amber dusk palette with embossed metallic accents.</p>
+            </div>
+          </div>
+
+          <!-- Work 4 -->
+          <div class="portfolio-item card-3d-interactive" onclick="openPortfolioModal(
+            'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1200&q=80',
+            'Vapor & Soft-Tech Aesthetic Poster',
+            'Soft Copy Design',
+            'Minimalist layout combining clean typography with dreamlike cyberpunk pastels. Delivered in multiple printable ratios.'
+          )">
+            <div class="portfolio-img-container">
+              <span class="portfolio-tag">Soft Copy Poster</span>
+              <img class="portfolio-img" src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=600&q=80" alt="Soft Tech Aesthetic Poster" loading="lazy" />
+            </div>
+            <div class="portfolio-content">
+              <h3 class="portfolio-title">Aura & Soft-Tech Print</h3>
+              <p class="portfolio-desc">Gradient mapping, typographical harmony, and high-DPI rasterization.</p>
+            </div>
+          </div>
+
+          <!-- Work 5 -->
+          <div class="portfolio-item card-3d-interactive" onclick="openPortfolioModal(
+            'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=1200&q=80',
+            'Atmospheric Monochromatic Edit',
+            'Color Grading',
+            'Deep shadow restoration, selective contrast grading, and vintage matte black finishing.'
+          )">
+            <div class="portfolio-img-container">
+              <span class="portfolio-tag">Color Grading</span>
+              <img class="portfolio-img" src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80" alt="Monochromatic Edit" loading="lazy" />
+            </div>
+            <div class="portfolio-content">
+              <h3 class="portfolio-title">Monochrome Velvet Grade</h3>
+              <p class="portfolio-desc">High dynamic range contrast sculpting with rich film shadow roll-off.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="slider-hint">
+        <span>↔</span> Hover or drag sideways to navigate in 3D perspective
+      </div>
+    </section>
+
+    <!-- 2. Services Section (3D Tilt Cards) -->
+    <section id="services">
+      <div class="section-header">
+        <span class="section-tag">What We Craft</span>
+        <h2 class="section-title">Design Offerings</h2>
+        <p class="section-description">
+          Every project is handled with one-on-one personal care, intentional typography, and meticulous color balance.
+        </p>
+      </div>
+
+      <div class="services-grid">
+        <!-- Service 1 -->
+        <div class="card-3d-wrap">
+          <div class="card-3d service-card">
+            <div class="card-glare"></div>
+            <span class="service-icon">💌</span>
+            <h3 class="service-title">Bespoke Digital Invitations</h3>
+            <p class="service-desc">
+              Custom invitations for weddings, birthdays, book launches, and soirées. Tailored with animated RSVP links or print-ready PDF/JPGs.
+            </p>
+            <ul class="service-features">
+              <li>High-res digital files (phone screen + print)</li>
+              <li>Custom typography & monogram locks</li>
+              <li>Up to 3 design revisions included</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="card-3d-wrap">
+          <div class="card-3d service-card">
+            <div class="card-glare"></div>
+            <span class="service-icon">🎨</span>
+            <h3 class="service-title">Aesthetic Photo Edits & Grading</h3>
+            <p class="service-desc">
+              Transform your raw snapshots into cinematic visuals. From subtle analog film grain to moody color sculpting and portrait clean-up.
+            </p>
+            <ul class="service-features">
+              <li>Film emulation (Kodak, CineStill, Fuji)</li>
+              <li>Skin texture preservation & lighting polish</li>
+              <li>Atmospheric color balance</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="card-3d-wrap">
+          <div class="card-3d service-card">
+            <div class="card-glare"></div>
+            <span class="service-icon">📁</span>
+            <h3 class="service-title">Soft-Copy Prints & Visuals</h3>
+            <p class="service-desc">
+              Digital wallpapers, lyric posters, aesthetic art prints, and custom gift keepsakes delivered in uncompressed formats.
+            </p>
+            <ul class="service-features">
+              <li>300+ DPI vector & lossless raster</li>
+              <li>Instant cloud delivery link</li>
+              <li>Multiple standard frame sizes</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Upgraded Interactive Order Customizer -->
+    <section id="customizer">
+      <div class="section-header">
+        <span class="section-tag">Commission a Design</span>
+        <h2 class="section-title">Interactive Order Customizer</h2>
+        <p class="section-description">
+          Choose your aesthetic style, attach reference images, and select your turnaround speed.
+        </p>
+      </div>
+
+      <div class="order-form-container">
+        <div class="card-3d">
+          <div class="card-glare"></div>
+
+          <form id="orderForm" onsubmit="handleOrderSubmission(event)">
+
+            <!-- Client Info -->
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label" for="clientName">Your Name *</label>
+                <input type="text" id="clientName" name="name" class="input-3d" placeholder="e.g. Sayantika Das" required minlength="2" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="clientEmail">Email Address *</label>
+                <input type="email" id="clientEmail" name="email" class="input-3d" placeholder="your.name@example.com" required />
+              </div>
+            </div>
+
+            <!-- Service Selection -->
+            <div class="form-group">
+              <label class="form-label" for="serviceSelect">Service Type *</label>
+              <select id="serviceSelect" name="service" class="input-3d" required>
+                <option value="">Select a service...</option>
+                <option value="Bespoke Digital Invitation">💌 Bespoke Digital Invitation</option>
+                <option value="Aesthetic Photo Edit & Retouch">🎨 Aesthetic Photo Edit & Retouch</option>
+                <option value="Soft-Copy Wall Art & Poster">📁 Soft-Copy Wall Art & Poster</option>
+                <option value="Custom Minimal Visual Identity">✨ Custom Visual Keepsake / Other</option>
+              </select>
+            </div>
+
+            <!-- Aesthetic Style Selector (Interactive Pills) -->
+            <div class="form-group">
+              <label class="form-label">Aesthetic Style Preference</label>
+              <div class="form-hint">Select the mood that best captures your vision:</div>
+              <div class="style-pills-grid" id="stylePills">
+                <label class="style-pill active">
+                  <input type="radio" name="style_preference" value="Minimalist Editorial" checked />
+                  <span>📰 Minimalist Editorial</span>
+                </label>
+                <label class="style-pill">
+                  <input type="radio" name="style_preference" value="Vintage Film & Grain" />
+                  <span>🎞️ Vintage Film & Grain</span>
+                </label>
+                <label class="style-pill">
+                  <input type="radio" name="style_preference" value="Soft-Tech & Pastel" />
+                  <span>🌫️ Soft-Tech & Pastel</span>
+                </label>
+                <label class="style-pill">
+                  <input type="radio" name="style_preference" value="Moody Nocturne" />
+                  <span>🍷 Moody Nocturne</span>
+                </label>
+                <label class="style-pill">
+                  <input type="radio" name="style_preference" value="Golden Romantic" />
+                  <span>🍯 Golden Romantic</span>
+                </label>
+                <label class="style-pill">
+                  <input type="radio" name="style_preference" value="Custom Style" />
+                  <span>✨ Surprise Me / Custom</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Turnaround Speed -->
+            <div class="form-group">
+              <label class="form-label">Turnaround Time</label>
+              <div class="turnaround-grid" id="turnaroundGrid">
+                <label class="turnaround-card active">
+                  <input type="radio" name="turnaround" value="Standard (3-5 Days)" checked />
+                  <div>
+                    <div style="font-weight: 600;">Standard Pace</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">3–5 business days</div>
+                  </div>
+                  <span>🌱</span>
+                </label>
+                <label class="turnaround-card">
+                  <input type="radio" name="turnaround" value="Priority (48 Hours)" />
+                  <div>
+                    <div style="font-weight: 600;">Priority</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">Within 48 hours</div>
+                  </div>
+                  <span>⚡</span>
+                </label>
+                <label class="turnaround-card">
+                  <input type="radio" name="turnaround" value="Rush (24 Hours)" />
+                  <div>
+                    <div style="font-weight: 600;">Rush Order</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">Within 24 hours</div>
+                  </div>
+                  <span>🔥</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Drag & Drop Inspiration Image Dropzone -->
+            <div class="form-group">
+              <label class="form-label">Attach References & Inspiration (Optional)</label>
+              <div class="form-hint">Upload photos, color palettes, or drafts (up to 5 images, max 15MB each).</div>
+              <div class="dropzone-container" id="dropzone">
+                <span class="dropzone-icon">📷</span>
+                <div class="dropzone-text">Drop reference images here, or browse files</div>
+                <div class="dropzone-subtext">Supports PNG, JPG, WEBP, GIF, PDF</div>
+                <input type="file" id="fileInput" name="reference_images" class="dropzone-file-input" multiple accept="image/*,.pdf" />
+              </div>
+              <div class="file-previews-tray" id="filePreviews"></div>
+            </div>
+
+            <!-- Project Details Description -->
+            <div class="form-group">
+              <label class="form-label" for="projectDescription">Project Details & Vision *</label>
+              <textarea id="projectDescription" name="description" class="input-3d" rows="4" placeholder="Tell us about the occasion, text to include, preferred color tones, or any special requests..." required minlength="10"></textarea>
+            </div>
+
+            <!-- Submit Button & Feedback -->
+            <button type="submit" id="submitBtn" class="btn-3d" style="width: 100%; margin-top: 1rem;">
+              <span>🚀 Submit Order Request</span>
+            </button>
+
+            <div id="formFeedback" class="form-feedback"></div>
+          </form>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Curated Aesthetic Affiliate Picks & Ad Showcase -->
+    <section id="curated-shop">
+      <div class="section-header">
+        <span class="section-tag">Aesthetic Living</span>
+        <h2 class="section-title">Lumière Studio Picks & Curated Finds</h2>
+        <p class="section-description">
+          Handpicked aesthetic tools, stationery, desk essentials, and collectible goods that inspire our creative process.
+        </p>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="shop-filter-bar">
+        <button class="shop-filter-btn active" onclick="filterShop('all', this)">All Items</button>
+        <button class="shop-filter-btn" onclick="filterShop('stationery', this)">Art & Stationery</button>
+        <button class="shop-filter-btn" onclick="filterShop('decor', this)">Desk & Room Decor</button>
+        <button class="shop-filter-btn" onclick="filterShop('kpop', this)">K-Pop & Collectibles</button>
+        <button class="shop-filter-btn" onclick="filterShop('gifts', this)">Keychains & Gifts</button>
+      </div>
+
+      <!-- Affiliate Product Cards Grid -->
+      <div class="affiliate-grid" id="affiliateGrid">
+
+        <!-- Product 1 -->
+        <div class="product-card-3d" data-category="stationery">
+          <div class="product-img-wrap">
+            <span class="product-category-tag">Stationery</span>
+            <img class="product-img" src="https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&w=600&q=80" alt="Minimalist Linen Hardcover Journal" loading="lazy" />
+          </div>
+          <h3 class="product-title">Linen Hardcover Art Journal</h3>
+          <p class="product-desc">160 GSM bleed-resistant watercolor paper with lay-flat binding and ribbon bookmark.</p>
+          <div class="product-footer">
+            <div class="product-rating">★★★★★ 4.9</div>
+            <a href="https://www.amazon.com/dp/B08XJ8P9W2?tag=lumierepicks-20" target="_blank" rel="noopener sponsored" class="btn-3d btn-3d-secondary" style="padding: 8px 16px; font-size: 0.85rem;">
+              View on Amazon ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product-card-3d" data-category="stationery">
+          <div class="product-img-wrap">
+            <span class="product-category-tag">Art Tools</span>
+            <img class="product-img" src="https://images.unsplash.com/photo-1569683795645-b62e50fbf103?auto=format&fit=crop&w=600&q=80" alt="Japanese Calligraphy Brush Pen Set" loading="lazy" />
+          </div>
+          <h3 class="product-title">Japanese Fine Brush Pen Set</h3>
+          <p class="product-desc">Archival waterproof pigment ink. Perfect for hand-lettering and delicate line art.</p>
+          <div class="product-footer">
+            <div class="product-rating">★★★★★ 4.8</div>
+            <a href="https://www.amazon.com/dp/B07L5S8V8F?tag=lumierepicks-20" target="_blank" rel="noopener sponsored" class="btn-3d btn-3d-secondary" style="padding: 8px 16px; font-size: 0.85rem;">
+              View on Amazon ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product-card-3d" data-category="decor">
+          <div class="product-img-wrap">
+            <span class="product-category-tag">Desk Decor</span>
+            <img class="product-img" src="https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=600&q=80" alt="Warm Amber Desk Lamp" loading="lazy" />
+          </div>
+          <h3 class="product-title">Warm Amber Ambient Desk Glow</h3>
+          <p class="product-desc">Dimmable 2200K warm twilight lamp with touch dimmer and frosted glass sphere.</p>
+          <div class="product-footer">
+            <div class="product-rating">★★★★☆ 4.7</div>
+            <a href="https://www.amazon.com/dp/B09M2K36M4?tag=lumierepicks-20" target="_blank" rel="noopener sponsored" class="btn-3d btn-3d-secondary" style="padding: 8px 16px; font-size: 0.85rem;">
+              View on Amazon ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="product-card-3d" data-category="kpop">
+          <div class="product-img-wrap">
+            <span class="product-category-tag">K-Pop & Display</span>
+            <img class="product-img" src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80" alt="Photocard Acrylic Display Frame" loading="lazy" />
+          </div>
+          <h3 class="product-title">Magnetic Acrylic Photocard Stand</h3>
+          <p class="product-desc">Crystal-clear UV-protective acrylic frame with holographic sparkle film inlay.</p>
+          <div class="product-footer">
+            <div class="product-rating">★★★★★ 5.0</div>
+            <a href="https://www.amazon.com/dp/B0B7F8P9QK?tag=lumierepicks-20" target="_blank" rel="noopener sponsored" class="btn-3d btn-3d-secondary" style="padding: 8px 16px; font-size: 0.85rem;">
+              View on Amazon ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- Product 5 -->
+        <div class="product-card-3d" data-category="gifts">
+          <div class="product-img-wrap">
+            <span class="product-category-tag">Gift Item</span>
+            <img class="product-img" src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=600&q=80" alt="Vintage Motel Keytag & Charm" loading="lazy" />
+          </div>
+          <h3 class="product-title">Gilded Custom Motel Keytag</h3>
+          <p class="product-desc">Retro French typography embossed in gold foil on heavyweight matte acrylic.</p>
+          <div class="product-footer">
+            <div class="product-rating">★★★★★ 4.8</div>
+            <a href="https://www.amazon.com/dp/B08Y9M78X1?tag=lumierepicks-20" target="_blank" rel="noopener sponsored" class="btn-3d btn-3d-secondary" style="padding: 8px 16px; font-size: 0.85rem;">
+              View on Amazon ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- Product 6 -->
+        <div class="product-card-3d" data-category="decor">
+          <div class="product-img-wrap">
+            <span class="product-category-tag">Desk Decor</span>
+            <img class="product-img" src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80" alt="Ceramic Flower Vase & Brush Holder" loading="lazy" />
+          </div>
+          <h3 class="product-title">Wabi-Sabi Ceramic Desk Vase</h3>
+          <p class="product-desc">Sculptural organic silhouette for dried wildflowers, calligraphy brushes, or pens.</p>
+          <div class="product-footer">
+            <div class="product-rating">★★★★☆ 4.7</div>
+            <a href="https://www.amazon.com/dp/B09V7N4C3Z?tag=lumierepicks-20" target="_blank" rel="noopener sponsored" class="btn-3d btn-3d-secondary" style="padding: 8px 16px; font-size: 0.85rem;">
+              View on Amazon ↗
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="affiliate-disclosure">
+        Disclosure: Lumière curates genuine aesthetic recommendations. As an Amazon Associate, we may earn a small commission on qualifying purchases made through our links, with zero additional cost to you.
+      </div>
+    </section>
+
+    <!-- 5. Contact Section -->
+    <section id="contact">
+      <div class="section-header">
+        <span class="section-tag">Reach Out</span>
+        <h2 class="section-title">Direct Inquiries</h2>
+        <p class="section-description">
+          Have an unusual request, wholesale inquiry, or collaboration idea? We'd love to chat.
+        </p>
+      </div>
+
+      <div class="card-3d-wrap" style="max-width: 600px; margin: 0 auto;">
+        <div class="card-3d" style="text-align: center;">
+          <div class="card-glare"></div>
+          <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">📬</div>
+          <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Sayantika Das</h3>
+          <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Founder & Creative Director of Lumière</p>
+          
+          <div style="display: flex; flex-direction: column; gap: 0.75rem; align-items: center;">
+            <a href="mailto:lumiereforyou.business@gmail.com" class="btn-3d" style="width: 100%; max-width: 380px;">
+              ✉️ lumiereforyou.business@gmail.com
+            </a>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">
+              Average response time: Within 24 hours
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Lightbox Modal for Cinematic Portfolio Zoom -->
+  <div id="imageModal" onclick="closePortfolioModal()">
+    <div class="modal-content-wrap" onclick="event.stopPropagation()">
+      <img id="modalImg" src="" alt="Enlarged Portfolio Artwork" />
+      <div class="modal-info">
+        <div>
+          <span id="modalTag" class="hero-badge" style="margin-bottom: 0.75rem;">Tag</span>
+          <h2 id="modalTitle" style="font-size: 1.5rem; margin-bottom: 0.5rem;">Title</h2>
+          <p id="modalDesc" style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">Description</p>
+        </div>
+        <div style="margin-top: 2rem;">
+          <a href="#customizer" onclick="closePortfolioModal()" class="btn-3d" style="width: 100%;">
+            ✨ Request a Similar Design
+          </a>
+        </div>
       </div>
     </div>
   </div>
-</section>
 
-<section>
-  <div class="card">
-    <h2>🌟 Why Lumière</h2>
-    <div class="trust">
-      <div class="badge">✔ Custom Crafted</div>
-      <div class="badge">✔ Digital Delivery</div>
-      <div class="badge">✔ One-on-One Support</div>
-      <div class="badge">✔ Transparent Pricing</div>
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div style="font-size: 1.5rem;">🌫️</div>
+      <p style="font-weight: 600; font-size: 1rem;">Lumière — Every Version Teaches Something</p>
+      <div class="footer-links">
+        <a href="#showcase">Portfolio</a>
+        <a href="#services">Services</a>
+        <a href="#customizer">Custom Order</a>
+        <a href="#curated-shop">Curated Picks</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <p class="footer-credit">
+        © 2026 Lumière Studio • Designed with intentional light and craft
+      </p>
+      <a href="/admin.html" class="admin-link">🔒 Studio Desk Login</a>
     </div>
-  </div>
-</section>
+  </footer>
 
-<section id="contact">
-  <div class="card">
-    <h2>📬 Contact</h2>
-    <p>Email: youremail@example.com</p>
-    <p>Instagram: @yourhandle</p>
-  </div>
-</section>
+  <!-- ==========================================================================
+       12. Script Engine: 3D Interactions, Slider, Themes, & Order Pipeline
+       ========================================================================== -->
+  <script>
+    // ----------------------------------------------------
+    // Theme Management (6 Finalized Themes)
+    // ----------------------------------------------------
+    const THEMES = ['studio-paper', 'wisteria-veil', 'golden-hour', 'cachemire', 'espresso', 'bordeaux'];
 
-<footer>
-  <p>© 2026 Lumière • Crafted with care</p>
-</footer>
-
-<script>
-  const API_BASE = 'https://lumiere-ol4v.onrender.com';
-  
-  // Form submission handler
-  async function handleOrder(e){
-    e.preventDefault();
-    
-    const form = document.getElementById('orderForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const messageDiv = document.getElementById('formMessage');
-    
-    // Collect form data
-    const formData = {
-      name: document.getElementById('name').value.trim(),
-      email: document.getElementById('email').value.trim(),
-      service: document.getElementById('service').value,
-      description: document.getElementById('description').value.trim()
-    };
-    
-    // Set loading state
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending...';
-    messageDiv.className = 'form-message loading';
-    messageDiv.textContent = '⏳ Processing your request...';
-    
-    try {
-      const response = await fetch(`${API_BASE}/api/submit-order`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
-      });
-      
-      const data = await response.json();
-      
-      if (response.ok && data.success) {
-        // Success
-        messageDiv.className = 'form-message success';
-        messageDiv.textContent = '✓ ' + data.message;
-        form.reset();
-        submitBtn.textContent = 'Send Request';
-        
-        // Clear message after 5 seconds
-        setTimeout(() => {
-          messageDiv.textContent = '';
-          messageDiv.className = 'form-message';
-        }, 5000);
-      } else {
-        // Error response from server
-        messageDiv.className = 'form-message error';
-        messageDiv.textContent = '✗ ' + (data.message || 'Failed to send request');
-        submitBtn.textContent = 'Send Request';
-      }
-    } catch (error) {
-      // Network error or server unreachable
-      console.error('Error:', error);
-      messageDiv.className = 'form-message error';
-      messageDiv.textContent = '✗ Unable to connect to server. Make sure the backend is running on port 5000.';
-      submitBtn.textContent = 'Send Request';
-    } finally {
-      submitBtn.disabled = false;
+    function applyTheme(themeName) {
+      if (!THEMES.includes(themeName)) themeName = 'studio-paper';
+      document.body.setAttribute('data-theme', themeName);
+      localStorage.setItem('lumiere_active_theme', themeName);
+      const select = document.getElementById('themeSelect');
+      if (select) select.value = themeName;
     }
-  }
 
-  function setTheme(theme){
-    const r = document.documentElement;
-    const t = Object.freeze({
-      minimal:{'--bg':'#ffffff','--text':'#1f2937','--card':'#fafafa','--header':'#ffffff','--footer':'#f9fafb','--button':'#111827','--accent':'#111827','--accent-light':'rgba(17,24,39,0.05)','--accent-hover':'rgba(17,24,39,0.12)'},
-      lavender:{'--bg':'#f3f0ff','--text':'#4b0082','--card':'#f8f5ff','--header':'#f5f0ff','--footer':'#f3f0ff','--button':'#4b0082','--accent':'#6a0dad','--accent-light':'rgba(106,13,173,0.05)','--accent-hover':'rgba(106,13,173,0.12)'},
-      warm:{'--bg':'#fff8e1','--text':'#7a4c00','--card':'#fff3c4','--header':'#fff6d8','--footer':'#fff8e1','--button':'#7a4c00','--accent':'#d97706','--accent-light':'rgba(217,119,6,0.05)','--accent-hover':'rgba(217,119,6,0.12)'},
-      'soft-beige':{'--bg':'#fdf6f0','--text':'#5a4630','--card':'#f9f2eb','--header':'#fcf5ed','--footer':'#fdf6f0','--button':'#5a4630','--accent':'#a78b5c','--accent-light':'rgba(167,139,92,0.05)','--accent-hover':'rgba(167,139,92,0.12)'},
-      'dark-autumn':{'--bg':'#2b1b0f','--text':'#e0d7c6','--card':'#3a2719','--header':'#2b1b0f','--footer':'#2b1b0f','--button':'#d6b984','--accent':'#8b5e3c','--accent-light':'rgba(139,94,60,0.05)','--accent-hover':'rgba(139,94,60,0.12)'},
-      'dark-vamp':{'--bg':'#0b0b0b','--text':'#e6b0b0','--card':'#161616','--header':'#0b0b0b','--footer':'#0b0b0b','--button':'#8b1e2d','--accent':'#7a1c28','--accent-light':'rgba(122,28,40,0.08)','--accent-hover':'rgba(122,28,40,0.18)'}
+    // Load saved theme on boot
+    window.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('lumiere_active_theme') || 'studio-paper';
+      applyTheme(saved);
+      init3DTilt();
+      initCinematicSlider();
+      initFormControls();
     });
-    const c = t[theme] || t.minimal;
-    Object.keys(c).forEach(k => r.style.setProperty(k, c[k]));
-    
-    // Save theme preference to localStorage
-    localStorage.setItem('lumiere-theme', theme);
-  }
-  
-  // Load theme from localStorage on page load
-  window.addEventListener('DOMContentLoaded', () => {
-    const savedTheme = localStorage.getItem('lumiere-theme') || 'minimal';
-    setTheme(savedTheme);
-    document.getElementById('theme').value = savedTheme;
-  });
-</script>
 
+    // ----------------------------------------------------
+    // 3D Perspective Card Tilt & Dynamic Glare Engine
+    // ----------------------------------------------------
+    function init3DTilt() {
+      const cards = document.querySelectorAll('.card-3d, .product-card-3d');
+
+      cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+
+          const rotateX = ((y - centerY) / centerY) * -9; // Max 9 deg
+          const rotateY = ((x - centerX) / centerX) * 9;
+
+          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(15px)`;
+          card.style.setProperty('--mouse-x', `${(x / rect.width) * 100}%`);
+          card.style.setProperty('--mouse-y', `${(y / rect.height) * 100}%`);
+        });
+
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+        });
+      });
+    }
+
+    // ----------------------------------------------------
+    // 3D Mouse-Driven Cinematic Portfolio Slider
+    // ----------------------------------------------------
+    function initCinematicSlider() {
+      const viewport = document.getElementById('showcaseViewport');
+      const track = document.getElementById('showcaseTrack');
+      if (!viewport || !track) return;
+
+      let targetTranslateX = 0;
+      let currentTranslateX = 0;
+      let isDragging = false;
+      let startX = 0;
+      let prevTranslate = 0;
+
+      function updateSliderBoundaries() {
+        const viewportWidth = viewport.offsetWidth;
+        const trackWidth = track.scrollWidth;
+        const maxScroll = Math.max(0, trackWidth - viewportWidth + 60);
+        return { viewportWidth, trackWidth, maxScroll };
+      }
+
+      // Smooth mouse interaction: pointer location drives track inertia
+      viewport.addEventListener('mousemove', (e) => {
+        if (isDragging) return;
+        const { viewportWidth, maxScroll } = updateSliderBoundaries();
+        const rect = viewport.getBoundingClientRect();
+        const mouseRatio = (e.clientX - rect.left) / viewportWidth;
+        // Map ratio (0 to 1) across -maxScroll
+        targetTranslateX = -mouseRatio * maxScroll;
+      });
+
+      // Dragging support for mouse / touch
+      viewport.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.pageX - track.offsetLeft;
+        prevTranslate = targetTranslateX;
+      });
+
+      window.addEventListener('mouseup', () => {
+        isDragging = false;
+      });
+
+      viewport.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX - track.offsetLeft;
+        const walk = (x - startX) * 1.4;
+        const { maxScroll } = updateSliderBoundaries();
+        targetTranslateX = Math.min(0, Math.max(-maxScroll, prevTranslate + walk));
+      });
+
+      // Smooth Animation Loop with 3D Card Angling
+      function animate() {
+        currentTranslateX += (targetTranslateX - currentTranslateX) * 0.08;
+        track.style.transform = `translateX(${currentTranslateX}px)`;
+
+        // Tilt individual portfolio items based on their offset from screen center
+        const viewportCenter = window.innerWidth / 2;
+        const items = track.querySelectorAll('.portfolio-item');
+        items.forEach(item => {
+          const rect = item.getBoundingClientRect();
+          const itemCenter = rect.left + rect.width / 2;
+          const distFromCenter = (itemCenter - viewportCenter) / (window.innerWidth / 2);
+          const clamped = Math.max(-1, Math.min(1, distFromCenter));
+          const rotateY = clamped * 12;
+          const scale = 1 - Math.abs(clamped) * 0.06;
+
+          if (!item.matches(':hover')) {
+            item.style.transform = `perspective(1000px) rotateY(${-rotateY}deg) scale(${scale})`;
+          }
+        });
+
+        requestAnimationFrame(animate);
+      }
+      requestAnimationFrame(animate);
+    }
+
+    // Lightbox modal for portfolio
+    function openPortfolioModal(imgSrc, title, tag, desc) {
+      document.getElementById('modalImg').src = imgSrc;
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modalTag').textContent = tag;
+      document.getElementById('modalDesc').textContent = desc;
+      document.getElementById('imageModal').classList.add('active');
+    }
+
+    function closePortfolioModal() {
+      document.getElementById('imageModal').classList.remove('active');
+    }
+
+    // ----------------------------------------------------
+    // Form Interactive Controls (Pills, Uploads, Turnaround)
+    // ----------------------------------------------------
+    let attachedFiles = [];
+
+    function initFormControls() {
+      // Style pills selector
+      const stylePills = document.querySelectorAll('.style-pill');
+      stylePills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          stylePills.forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          const radio = pill.querySelector('input[type="radio"]');
+          if (radio) radio.checked = true;
+        });
+      });
+
+      // Turnaround selector
+      const turnaroundCards = document.querySelectorAll('.turnaround-card');
+      turnaroundCards.forEach(card => {
+        card.addEventListener('click', () => {
+          turnaroundCards.forEach(c => c.classList.remove('active'));
+          card.classList.add('active');
+          const radio = card.querySelector('input[type="radio"]');
+          if (radio) radio.checked = true;
+        });
+      });
+
+      // File upload dropzone
+      const dropzone = document.getElementById('dropzone');
+      const fileInput = document.getElementById('fileInput');
+
+      if (dropzone && fileInput) {
+        ['dragenter', 'dragover'].forEach(eventName => {
+          dropzone.addEventListener(eventName, (e) => {
+            e.preventDefault();
+            dropzone.classList.add('dragover');
+          });
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+          dropzone.addEventListener(eventName, (e) => {
+            e.preventDefault();
+            dropzone.classList.remove('dragover');
+          });
+        });
+
+        dropzone.addEventListener('drop', (e) => {
+          if (e.dataTransfer && e.dataTransfer.files) {
+            handleFiles(e.dataTransfer.files);
+          }
+        });
+
+        fileInput.addEventListener('change', () => {
+          if (fileInput.files) {
+            handleFiles(fileInput.files);
+          }
+        });
+      }
+    }
+
+    function handleFiles(files) {
+      Array.from(files).forEach(file => {
+        if (attachedFiles.length >= 5) {
+          alert('Maximum of 5 reference files allowed per order.');
+          return;
+        }
+        if (file.size > 15 * 1024 * 1024) {
+          alert(`File "${file.name}" exceeds 15MB size limit.`);
+          return;
+        }
+        attachedFiles.push(file);
+      });
+      renderFilePreviews();
+    }
+
+    function removeFile(index) {
+      attachedFiles.splice(index, 1);
+      renderFilePreviews();
+    }
+
+    function renderFilePreviews() {
+      const tray = document.getElementById('filePreviews');
+      tray.innerHTML = '';
+
+      attachedFiles.forEach((file, idx) => {
+        const chip = document.createElement('div');
+        chip.className = 'preview-chip';
+
+        if (file.type.startsWith('image/')) {
+          const img = document.createElement('img');
+          img.src = URL.createObjectURL(file);
+          chip.appendChild(img);
+        } else {
+          chip.innerHTML = `<div style="color:#fff; font-size:0.7rem; padding:8px; text-align:center;">📄 ${file.name.slice(0, 8)}...</div>`;
+        }
+
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'preview-remove-btn';
+        removeBtn.innerHTML = '✕';
+        removeBtn.type = 'button';
+        removeBtn.onclick = (e) => {
+          e.stopPropagation();
+          removeFile(idx);
+        };
+        chip.appendChild(removeBtn);
+
+        tray.appendChild(chip);
+      });
+    }
+
+    // ----------------------------------------------------
+    // Order Form Submission Engine
+    // ----------------------------------------------------
+    async function handleOrderSubmission(e) {
+      e.preventDefault();
+
+      const submitBtn = document.getElementById('submitBtn');
+      const feedback = document.getElementById('formFeedback');
+
+      const name = document.getElementById('clientName').value.trim();
+      const email = document.getElementById('clientEmail').value.trim();
+      const service = document.getElementById('serviceSelect').value;
+      const description = document.getElementById('projectDescription').value.trim();
+
+      const styleRadio = document.querySelector('input[name="style_preference"]:checked');
+      const stylePreference = styleRadio ? styleRadio.value : 'Minimalist Editorial';
+
+      const turnaroundRadio = document.querySelector('input[name="turnaround"]:checked');
+      const turnaround = turnaroundRadio ? turnaroundRadio.value : 'Standard (3-5 Days)';
+
+      // Form validation
+      if (!name || name.length < 2) {
+        showFeedback('Please enter your name (minimum 2 characters).', 'error');
+        return;
+      }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showFeedback('Please enter a valid email address.', 'error');
+        return;
+      }
+      if (!service) {
+        showFeedback('Please select a service type.', 'error');
+        return;
+      }
+      if (!description || description.length < 10) {
+        showFeedback('Please describe your vision in at least 10 characters.', 'error');
+        return;
+      }
+
+      // Prepare FormData payload
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('email', email);
+      formData.append('service', service);
+      formData.append('style_preference', stylePreference);
+      formData.append('turnaround', turnaround);
+      formData.append('description', description);
+
+      attachedFiles.forEach(file => {
+        formData.append('reference_images', file);
+      });
+
+      // Set Loading UI
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span>⏳ Transmitting to Studio...</span>';
+      showFeedback('Encrypting and sending order to Lumière Studio Desk...', 'loading');
+
+      try {
+        const response = await fetch('/api/submit-order', {
+          method: 'POST',
+          body: formData
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          showFeedback(`✓ Order ${data.orderCode} Confirmed! We received your request & references. We'll be in touch at ${email} shortly.`, 'success');
+          document.getElementById('orderForm').reset();
+          attachedFiles = [];
+          renderFilePreviews();
+        } else {
+          showFeedback(`✗ ${data.message || 'Submission failed. Please try again.'}`, 'error');
+        }
+      } catch (err) {
+        console.error('Submission error:', err);
+        showFeedback('✗ Could not reach backend server. Please verify the backend is active on port 5000.', 'error');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<span>🚀 Submit Order Request</span>';
+      }
+    }
+
+    function showFeedback(msg, type) {
+      const fb = document.getElementById('formFeedback');
+      fb.className = `form-feedback ${type}`;
+      fb.textContent = msg;
+    }
+
+    // ----------------------------------------------------
+    // Affiliate Shop Category Filter
+    // ----------------------------------------------------
+    function filterShop(category, btn) {
+      document.querySelectorAll('.shop-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const items = document.querySelectorAll('.product-card-3d');
+      items.forEach(item => {
+        if (category === 'all' || item.getAttribute('data-category') === category) {
+          item.style.display = 'flex';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+  </script>
 </body>
 </html>
