@@ -696,6 +696,7 @@
   <div id="toast" class="toast">Action updated</div>
 
   <script>
+    const API_BASE = (window.location.protocol === 'file:') ? 'http://localhost:5000' : '';
     let currentPin = sessionStorage.getItem('lumiere_admin_pin') || '';
     let allOrders = [];
     let currentFilter = 'all';
@@ -713,7 +714,7 @@
       errElem.style.display = 'none';
 
       try {
-        const res = await fetch('/api/admin/verify', {
+        const res = await fetch(`${API_BASE}/api/admin/verify`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ pin })
@@ -746,7 +747,7 @@
 
     async function fetchOrders() {
       try {
-        const res = await fetch(`/api/admin/orders?status=${currentFilter}`, {
+        const res = await fetch(`${API_BASE}/api/admin/orders?status=${currentFilter}`, {
           headers: { 'x-admin-pin': currentPin }
         });
 
@@ -827,13 +828,13 @@
                   const isImg = f.mime_type && f.mime_type.startsWith('image/');
                   if (isImg) {
                     return `
-                      <div class="attachment-preview" onclick="openLightbox('${f.file_path}')" title="${f.original_name}">
-                        <img src="${f.file_path}" alt="${f.original_name}" loading="lazy" />
+                      <div class="attachment-preview" onclick="openLightbox('${API_BASE}${f.file_path}')" title="${f.original_name}">
+                        <img src="${API_BASE}${f.file_path}" alt="${f.original_name}" loading="lazy" />
                       </div>
                     `;
                   } else {
                     return `
-                      <a class="attachment-preview" href="${f.file_path}" target="_blank" title="${f.original_name}">
+                      <a class="attachment-preview" href="${API_BASE}${f.file_path}" target="_blank" title="${f.original_name}">
                         <div class="attachment-pdf">📄<br>${f.original_name.slice(0, 10)}...</div>
                       </a>
                     `;
@@ -907,7 +908,7 @@
 
     async function updateOrderStatus(orderId, newStatus) {
       try {
-        const res = await fetch(`/api/admin/orders/${orderId}/status`, {
+        const res = await fetch(`${API_BASE}/api/admin/orders/${orderId}/status`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -932,7 +933,7 @@
         return;
       }
       try {
-        const res = await fetch(`/api/admin/orders/${orderId}`, {
+        const res = await fetch(`${API_BASE}/api/admin/orders/${orderId}`, {
           method: 'DELETE',
           headers: { 'x-admin-pin': currentPin }
         });
@@ -949,7 +950,7 @@
     }
 
     function exportOrders() {
-      window.open(`/api/admin/export?pin=${encodeURIComponent(currentPin)}`, '_blank');
+      window.open(`${API_BASE}/api/admin/export?pin=${encodeURIComponent(currentPin)}`, '_blank');
     }
 
     function openLightbox(src) {
